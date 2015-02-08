@@ -65,10 +65,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orchard.Framework\Orchard.Framework.csproj">
+      <Project>{54f40b56-a891-4e33-a1ce-de7818394025}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.WarmupStarter\Orchard.WarmupStarter.csproj">
+      <Project>{b52547b8-e55f-4751-9d61-46719b3d6059}</Project>
+      <Name>Orchard.WarmupStarter</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
