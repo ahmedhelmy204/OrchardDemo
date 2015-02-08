@@ -8,5 +8,7 @@ namespace Orchard.WarmupStarter
 {
     public class Starter<T> where T : class
     {
+
+
     }
 }

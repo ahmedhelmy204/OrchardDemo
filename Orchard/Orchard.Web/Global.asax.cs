@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
@@ -22,9 +23,17 @@ namespace Orchard.Web
 
         }
 
+        // register routes
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            //routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.Ignore("{resource}.axd/{*pathInfo}");
+        }
+
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            RegisterRoutes(RouteTable.Routes);
+            _starter = new Starter<IOrchardHost>();
         }
 
         protected void Session_Start(object sender, EventArgs e)
