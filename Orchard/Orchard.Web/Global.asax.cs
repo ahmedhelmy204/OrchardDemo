@@ -35,7 +35,8 @@ namespace Orchard.Web
         protected void Application_Start(object sender, EventArgs e)
         {
             RegisterRoutes(RouteTable.Routes);
-            _starter = new Starter<IOrchardHost>(HostInitialization,HostBeginRequest);
+            _starter = new Starter<IOrchardHost>(HostInitialization,HostBeginRequest,HostEndRequest);
+            _starter.OnApplicationStart(this);
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace Orchard.Web
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            _starter.OnBeginRequest(this);
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -72,6 +73,11 @@ namespace Orchard.Web
         {
             application.Context.Items["originalHttpContext"] = application.Context;
             host.BeginRequest();
+        }
+
+        private static void HostEndRequest(HttpApplication application,IOrchardHost host)
+        {
+            host.EndRequest();
         }
 
         private static IOrchardHost HostInitialization(HttpApplication application)
