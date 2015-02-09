@@ -22,12 +22,12 @@ namespace Orchard.Environment
         /// <summary>
         /// Called each time a request begins to offer a just-in-time reinitialization point
         /// </summary>
-        //void BeginRequest();
+        void BeginRequest();
 
         /// <summary>
         /// Called each time a request ends to deterministically commit and dispose outstanding activity
         /// </summary>
-        //void EndRequest();
+        void EndRequest();
 
         //ShellContext GetShellContext(ShellSettings shellSettings);
 

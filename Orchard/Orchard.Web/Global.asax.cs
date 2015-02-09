@@ -35,7 +35,7 @@ namespace Orchard.Web
         protected void Application_Start(object sender, EventArgs e)
         {
             RegisterRoutes(RouteTable.Routes);
-            _starter = new Starter<IOrchardHost>(HostInitialization);
+            _starter = new Starter<IOrchardHost>(HostInitialization,HostBeginRequest);
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -68,6 +68,12 @@ namespace Orchard.Web
 
         }
 
+        private static void HostBeginRequest(HttpApplication application, IOrchardHost host)
+        {
+            application.Context.Items["originalHttpContext"] = application.Context;
+            host.BeginRequest();
+        }
+
         private static IOrchardHost HostInitialization(HttpApplication application)
         {
             // Initialize dependency injection using autofac with the current application
@@ -75,9 +81,9 @@ namespace Orchard.Web
 
             host.Initialize();
 
-            //// initialize shells to speed up the first dynamic query
-            //host.BeginRequest();
-            //host.EndRequest();
+            // initialize shells to speed up the first dynamic query
+            host.BeginRequest();
+            host.EndRequest();
 
             return host;
         }
