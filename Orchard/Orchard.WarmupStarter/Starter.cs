@@ -41,7 +41,36 @@ namespace Orchard.WarmupStarter
 
         public void OnBeginRequest(HttpApplication application)
         {
+            // Initialization resulted in an error
+            if (_error != null)
+            {
+                // Save error for next requests and restart async initialization.
+                // Note: The reason we have to retry the initialization is that the 
+                //       application environment may change between requests,
+                //       e.g. App_Data is made read-write for the AppPool.
+                bool restartInitialization = false;
 
+                lock (_synLock)
+                {
+                    if (_error != null)
+                    {
+                        _previousError = _error;
+                        _error = null;
+                        restartInitialization = true;
+                    }
+                }
+
+                if (restartInitialization)
+                {
+                    LaunchStartupThread(application);
+                }
+            }
+
+            // Previous initialization resulted in an error (and another initialization is running)
+            if (_previousError != null)
+            {
+                _beginRequest(application, _initializationResult);
+            }
         }
 
         public void OnApplicationStart(HttpApplication application)
