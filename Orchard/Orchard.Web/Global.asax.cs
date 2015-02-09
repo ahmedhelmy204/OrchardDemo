@@ -19,6 +19,7 @@ namespace Orchard.Web
     {
         private static Starter<IOrchardHost> _starter;
 
+        // test my laptop git connection
         // class constructor
         public MvcApplication()
         {
