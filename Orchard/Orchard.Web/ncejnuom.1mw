@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
@@ -72,14 +73,6 @@ namespace Orchard.Web
         {
             // Initialize dependency injection using autofac with the current application
             var host = OrchardStarter.CreateHost(MvcSingletons);
-
-            host.Initialize();
-
-            //// initialize shells to speed up the first dynamic query
-            //host.BeginRequest();
-            //host.EndRequest();
-
-            return host;
         }
 
         /// <summary>
