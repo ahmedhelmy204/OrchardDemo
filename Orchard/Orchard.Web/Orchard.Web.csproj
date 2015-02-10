@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Orchard.Web.dll.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -69,6 +70,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Autofac.dll" />
+    <Content Include="bin\Autofac.pdb" />
+    <Content Include="bin\Autofac.xml" />
+    <Content Include="bin\Orchard.Framework.dll" />
+    <Content Include="bin\Orchard.Framework.pdb" />
+    <Content Include="bin\Orchard.WarmupStarter.dll" />
+    <Content Include="bin\Orchard.WarmupStarter.pdb" />
+    <Content Include="bin\Orchard.Web.dll" />
+    <Content Include="bin\Orchard.Web.pdb" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
